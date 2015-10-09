@@ -15,6 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('contact', 'WelcomeController@contact');
-
-Route::get('home', 'WelcomeController@index');
+Route::get('about', 'PagesController@about');
+Route::get('contact', 'PagesController@contact');
