@@ -6,7 +6,7 @@
     <title>App Page</title>
 </head>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/boostrap.min.css">
+     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" data-require="bootstrap-css@3.1.1" />
 
 <body>
 
