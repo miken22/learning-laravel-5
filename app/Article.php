@@ -18,7 +18,7 @@ class Article extends Model
 
     public function setPublishedAtAttribute($date)
     {
-        $this->attributes['published_at'] = Carbon::parse('Y-m-d', $date);
+        $this->attributes['published_at'] = Carbon::parse($date);
     }
 
     public function scopePublished($query)

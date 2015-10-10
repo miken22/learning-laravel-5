@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Article;
+use App\Http\Requests\CreateArticleRequest;
+use Illuminate\Http\Request;
 
+/**
+ * Class ArticlesController
+ * @package App\Http\Controllers
+ */
 class ArticlesController extends Controller
 {
     public function index() {
@@ -22,7 +25,6 @@ class ArticlesController extends Controller
     {
 
         $article = Article::findOrFail($id);
-        dd($article->published_at);
 
         return view('articles.show', compact('article'));
     }
@@ -32,7 +34,7 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
 
-    public function store()
+    public function store(CreateArticleRequest $request)
     {
 
         Article::create(Request::all());
