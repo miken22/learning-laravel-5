@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Article;
-use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 
 /**
@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
  */
 class ArticlesController extends Controller
 {
+    /**
+     * @return \Illuminate\View\View
+     */
     public function index() {
 
         $articles = Article::latest()->published()->get();
@@ -21,6 +24,10 @@ class ArticlesController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\View\View
+     */
     public function show($id)
     {
 
@@ -34,12 +41,37 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
 
-    public function store(CreateArticleRequest $request)
+    /**
+     * @param CreateArticleRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(ArticleRequest $request)
     {
-
-        Article::create(Request::all());
-
+        Article::create($request->all());
         return redirect('articles');
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('articles.edit', compact('article'));
+    }
+
+    /**
+     * @param $id
+     * @param CreateArticleRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update($id, ArticleRequest $request)
+    {
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+
+        return redirect('articles/');
     }
 
 }
