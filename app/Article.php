@@ -5,15 +5,26 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Article
+ * @package App
+ */
 class Article extends Model
 {
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'title',
         'body',
-        'published_at'
+        'published_at',
+        'user_id' // Temporary
     ];
 
+    /**
+     * @var array
+     */
     protected $dates = ['published_at'];
 
     /**
@@ -38,6 +49,14 @@ class Article extends Model
     public function scopeUnPublished($query)
     {
         $query->where('published_at', '>', Carbon::now());
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
 }
